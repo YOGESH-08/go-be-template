@@ -8,10 +8,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/logging"
-	"github.com/CodeChefVIT/go-backend-template/pkg/middlewares"
-	"github.com/CodeChefVIT/go-backend-template/pkg/router"
-	"github.com/CodeChefVIT/go-backend-template/pkg/utils"
+	"github.com/CodeChefVIT/go-backend-template/internal/logging"
+	"github.com/CodeChefVIT/go-backend-template/internal/middlewares"
+	"github.com/CodeChefVIT/go-backend-template/internal/router"
+	"github.com/CodeChefVIT/go-backend-template/internal/utils"
 	"github.com/labstack/echo/v4"
 	emiddleware "github.com/labstack/echo/v4/middleware"
 )

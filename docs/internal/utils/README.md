@@ -1,4 +1,4 @@
-# pkg/utils/ Directory Documentation
+# internal/utils/ Directory Documentation
 
 This directory contains utility modules providing clients, configuration, and validation configuration.
 

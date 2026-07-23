@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/logging"
+	"github.com/CodeChefVIT/go-backend-template/internal/logging"
 	"github.com/redis/go-redis/v9"
 )
 

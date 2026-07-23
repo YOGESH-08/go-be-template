@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/dto"
-	"github.com/CodeChefVIT/go-backend-template/pkg/utils"
+	"github.com/CodeChefVIT/go-backend-template/internal/dto"
+	"github.com/CodeChefVIT/go-backend-template/internal/utils"
 	"github.com/labstack/echo/v4"
 )
 

@@ -6,12 +6,12 @@ This directory mirrors the source structure of the project to explain the purpos
 
 ```
 ├── cmd/               --> [docs/cmd/]              Application Entrypoint
-├── pkg/
-│   ├── controllers/   --> [docs/pkg/controllers/]  HTTP Controllers
-│   ├── db/            --> [docs/pkg/db/]           SQLC & Migration Schemas
-│   ├── dto/           --> [docs/pkg/dto/]          Data Transfer Objects & Validation
-│   ├── middlewares/   --> [docs/pkg/middlewares/]  Echo Middlewares
-│   └── utils/         --> [docs/pkg/utils/]        Helpers & Setup Utils
+├── internal/
+│   ├── controllers/   --> [docs/internal/controllers/]  HTTP Controllers
+│   ├── db/            --> [docs/internal/db/]           SQLC & Migration Schemas
+│   ├── dto/           --> [docs/internal/dto/]          Data Transfer Objects & Validation
+│   ├── middlewares/   --> [docs/internal/middlewares/]  Echo Middlewares
+│   └── utils/         --> [docs/internal/utils/]        Helpers & Setup Utils
 └── tests/             --> [docs/tests/]            Testing Strategies & Mocks
 ```
 

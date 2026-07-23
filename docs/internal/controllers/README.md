@@ -1,4 +1,4 @@
-# pkg/controllers/ Directory Documentation
+# internal/controllers/ Directory Documentation
 
 Controllers (Handlers) receive incoming Echo requests, invoke database queries, validate payloads, and return standardized JSON responses.
 

@@ -1,4 +1,4 @@
-# pkg/middlewares/ Directory Documentation
+# internal/middlewares/ Directory Documentation
 
 Middlewares intercept incoming HTTP requests before reaching controllers to perform actions like logging, recovery, authentication, and rate limiting.
 

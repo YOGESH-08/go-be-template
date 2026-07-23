@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/utils"
+	"github.com/CodeChefVIT/go-backend-template/internal/utils"
 	_ "github.com/jackc/pgx/v5/stdlib" // SQL driver wrapper for pgx/v5
 	"github.com/pressly/goose/v3"
 )

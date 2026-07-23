@@ -1,4 +1,4 @@
-# pkg/dto/ Directory Documentation
+# internal/dto/ Directory Documentation
 
 Data Transfer Objects (DTOs) define the structures of requests and responses exchanged by the API.
 

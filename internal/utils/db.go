@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/logging"
+	"github.com/CodeChefVIT/go-backend-template/internal/logging"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

@@ -6,8 +6,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/controllers"
-	"github.com/CodeChefVIT/go-backend-template/pkg/dto"
+	"github.com/CodeChefVIT/go-backend-template/internal/controllers"
+	"github.com/CodeChefVIT/go-backend-template/internal/dto"
 	"github.com/labstack/echo/v4"
 )
 

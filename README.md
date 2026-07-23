@@ -23,7 +23,7 @@ A production-level, highly scalable Go backend template built using the **Echo v
 ├── cmd/
 │   └── api/
 │       └── main.go            # Entrypoint & Graceful Shutdown
-├── pkg/
+├── internal/
 │   ├── controllers/           # HTTP handlers
 │   ├── db/                    # SQLC generated code
 │   ├── dto/                   # Request/Response structures & validation

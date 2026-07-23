@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/CodeChefVIT/go-backend-template/pkg/utils"
+	"github.com/CodeChefVIT/go-backend-template/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )

@@ -48,7 +48,7 @@ The project supports two levels of testing:
    - Specific expected field values.
 
 5. **📂 Directory Mirroring**:
-   The `/tests` folder should mirror the `/pkg` package structure for all integration tests:
+   The `/tests` folder should mirror the `/internal` package structure for all integration tests:
    - `tests/controllers/` — Integration tests for HTTP handlers.
    - `tests/services/` — Integration tests for complex business logic flows.
    - `tests/middlewares/` — Integration tests for custom middlewares.

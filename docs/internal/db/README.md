@@ -1,4 +1,4 @@
-# pkg/db/ Directory Documentation
+# internal/db/ Directory Documentation
 
 This folder contains generated database models and queries created by SQLC, mirroring the database structure.
 
@@ -10,7 +10,7 @@ Migrations are written in `database/schema` in SQL format, executed via Goose.
 ## SQLC Code Generation
 1. Schema files in `database/schema/` define the tables.
 2. Query files in `database/queries/` define raw SQL queries with SQLC parameter annotations.
-3. Run `make sqlc` or `sqlc generate` to compile them into typesafe Go code inside `pkg/db`.
+3. Run `make sqlc` or `sqlc generate` to compile them into typesafe Go code inside `internal/db`.
 
 ## Transaction Guidelines
 For queries needing database transactions:
