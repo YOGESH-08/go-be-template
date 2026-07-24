@@ -8,6 +8,8 @@ import (
 	"syscall"
 	"time"
 
+	"golang.org/x/time/rate"
+
 	"github.com/CodeChefVIT/go-backend-template/internal/logging"
 	"github.com/CodeChefVIT/go-backend-template/internal/middlewares"
 	"github.com/CodeChefVIT/go-backend-template/internal/router"
@@ -41,11 +43,11 @@ func main() {
 	e.Use(emiddleware.Recover())
 	e.Use(middlewares.Logger)
 	e.Use(emiddleware.Secure())
-	e.Use(emiddleware.RateLimiter(emiddleware.NewRateLimiterMemoryStore(20)))
+	e.Use(emiddleware.RateLimiter(emiddleware.NewRateLimiterMemoryStore(rate.Limit(utils.Config.RateLimitRPS))))
 	e.Use(emiddleware.BodyLimit("10M"))
 
-	// Configure CORS in non-production environments
-	if len(utils.Config.CORSOrigins) > 0 && utils.Config.Env != "production" {
+	// Configure CORS
+	if len(utils.Config.CORSOrigins) > 0 {
 		e.Use(emiddleware.CORSWithConfig(emiddleware.CORSConfig{
 			AllowOrigins:     utils.Config.CORSOrigins,
 			AllowMethods:     []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
@@ -86,8 +88,8 @@ func main() {
 		logging.Fatalf("HTTP server error: %v", err)
 	}
 
-	// Shutdown Echo context with 10s timeout
-	shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	// Shutdown Echo context with configurable timeout
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), utils.Config.ShutdownTimeout)
 	defer cancel()
 
 	if err := e.Shutdown(shutdownCtx); err != nil {

@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/CodeChefVIT/go-backend-template/internal/dto"
@@ -14,27 +15,55 @@ func HealthCheck(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(c.Request().Context(), 2*time.Second)
 	defer cancel()
 
-	postgresStatus := "OK"
-	if utils.DBPool == nil {
-		postgresStatus = "DOWN"
-	} else if err := utils.DBPool.Ping(ctx); err != nil {
-		postgresStatus = "DOWN"
-	}
+	var pgStatus, redisStatus string
+	var wg sync.WaitGroup
 
-	redisStatus := "OK"
-	if utils.RedisClient == nil {
-		redisStatus = "DOWN"
-	} else if err := utils.RedisClient.Ping(ctx).Err(); err != nil {
+	wg.Add(2)
+
+	// Check PostgreSQL
+	go func() {
+		defer wg.Done()
+		if utils.DBPool == nil {
+			pgStatus = "DOWN"
+			return
+		}
+		if err := utils.DBPool.Ping(ctx); err != nil {
+			pgStatus = "DOWN"
+			return
+		}
+		pgStatus = "OK"
+	}()
+
+	// Check Redis
+	go func() {
+		defer wg.Done()
+		if utils.RedisClient == nil {
+			redisStatus = "DOWN"
+			return
+		}
+		if err := utils.RedisClient.Ping(ctx).Err(); err != nil {
+			redisStatus = "DOWN"
+			return
+		}
+		redisStatus = "OK"
+	}()
+
+	wg.Wait()
+
+	if pgStatus == "" {
+		pgStatus = "DOWN"
+	}
+	if redisStatus == "" {
 		redisStatus = "DOWN"
 	}
 
 	status := http.StatusOK
-	if postgresStatus == "DOWN" || redisStatus == "DOWN" {
+	if pgStatus == "DOWN" || redisStatus == "DOWN" {
 		status = http.StatusServiceUnavailable
 	}
 
 	healthInfo := map[string]string{
-		"postgres": postgresStatus,
+		"postgres": pgStatus,
 		"redis":    redisStatus,
 	}
 

@@ -26,11 +26,10 @@ func InitDB() {
 		logging.Fatalf("Unable to parse database DSN: %v", err)
 	}
 
-	// Connection pool configurations suitable for production
-	config.MaxConns = 25
-	config.MinConns = 5
-	config.MaxConnLifetime = 30 * time.Minute
-	config.MaxConnIdleTime = 15 * time.Minute
+	config.MaxConns = int32(Config.PostgresMaxConns)
+	config.MinConns = int32(Config.PostgresMinConns)
+	config.MaxConnLifetime = Config.PostgresMaxConnLifetime
+	config.MaxConnIdleTime = Config.PostgresMaxConnIdleTime
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

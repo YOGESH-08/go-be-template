@@ -29,7 +29,11 @@ func InitLogger() {
 
 	logger, err := config.Build()
 	if err != nil {
-		panic("failed to initialize zap logger: " + err.Error())
+		// Fallback to a basic logger instead of panicking
+		fallback := zap.NewNop().Sugar()
+		Log = fallback
+		Log.Warnf("Failed to initialize zap logger, using noop logger: %v", err)
+		return
 	}
 
 	Log = logger.Sugar()
