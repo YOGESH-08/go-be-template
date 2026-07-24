@@ -11,6 +11,8 @@ This directory mirrors the source structure of the project to explain the purpos
 │   ├── db/            --> [docs/internal/db/]           SQLC & Migration Schemas
 │   ├── dto/           --> [docs/internal/dto/]          Data Transfer Objects & Validation
 │   ├── middlewares/   --> [docs/internal/middlewares/]  Echo Middlewares
+│   ├── router/        --> [docs/internal/router/]       Route Definitions
+│   ├── services/      --> [docs/internal/services/]     Business Logic Layer
 │   └── utils/         --> [docs/internal/utils/]        Helpers & Setup Utils
 └── tests/             --> [docs/tests/]            Testing Strategies & Mocks
 ```
