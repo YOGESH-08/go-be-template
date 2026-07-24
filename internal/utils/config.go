@@ -9,29 +9,29 @@ import (
 )
 
 type cfg struct {
-	Env              string   `env:"ENV" envDefault:"development"`
-	Port             string   `env:"PORT" envDefault:"8080"`
-	JWTSecret        string   `env:"JWT_SECRET,notEmpty"`
-	PostgresHost     string   `env:"POSTGRES_HOST,notEmpty"`
-	PostgresPort     string   `env:"POSTGRES_PORT,notEmpty"`
-	PostgresUser     string   `env:"POSTGRES_USER,notEmpty"`
-	PostgresPassword string   `env:"POSTGRES_PASSWORD,notEmpty"`
-	PostgresDB       string   `env:"POSTGRES_DB,notEmpty"`
-	PostgresSSLMode  string   `env:"POSTGRES_SSLMODE" envDefault:"disable"`
-	PostgresMaxConns int      `env:"POSTGRES_MAX_CONNS" envDefault:"25"`
-	PostgresMinConns int      `env:"POSTGRES_MIN_CONNS" envDefault:"5"`
+	Env                     string        `env:"ENV" envDefault:"development"`
+	Port                    string        `env:"PORT" envDefault:"8080"`
+	JWTSecret               string        `env:"JWT_SECRET,notEmpty"`
+	PostgresHost            string        `env:"POSTGRES_HOST,notEmpty"`
+	PostgresPort            string        `env:"POSTGRES_PORT,notEmpty"`
+	PostgresUser            string        `env:"POSTGRES_USER,notEmpty"`
+	PostgresPassword        string        `env:"POSTGRES_PASSWORD,notEmpty"`
+	PostgresDB              string        `env:"POSTGRES_DB,notEmpty"`
+	PostgresSSLMode         string        `env:"POSTGRES_SSLMODE" envDefault:"disable"`
+	PostgresMaxConns        int           `env:"POSTGRES_MAX_CONNS" envDefault:"25"`
+	PostgresMinConns        int           `env:"POSTGRES_MIN_CONNS" envDefault:"5"`
 	PostgresMaxConnLifetime time.Duration `env:"POSTGRES_MAX_CONN_LIFETIME" envDefault:"30m"`
 	PostgresMaxConnIdleTime time.Duration `env:"POSTGRES_MAX_CONN_IDLE_TIME" envDefault:"15m"`
-	RedisHost        string   `env:"REDIS_HOST" envDefault:"localhost"`
-	RedisPort        string   `env:"REDIS_PORT" envDefault:"6379"`
-	RedisPassword    string   `env:"REDIS_PASSWORD"`
-	RedisPoolSize    int      `env:"REDIS_POOL_SIZE" envDefault:"20"`
-	RedisMinIdleConns int     `env:"REDIS_MIN_IDLE_CONNS" envDefault:"5"`
-	FrontendURL      string   `env:"FRONTEND_URL" envDefault:"http://localhost:3000"`
-	AdminURL         string   `env:"ADMIN_URL" envDefault:"http://localhost:3067"`
-	RateLimitRPS     int      `env:"RATE_LIMIT_RPS" envDefault:"20"`
-	ShutdownTimeout  time.Duration `env:"SHUTDOWN_TIMEOUT" envDefault:"10s"`
-	CORSOrigins      []string // Computed field
+	RedisHost               string        `env:"REDIS_HOST" envDefault:"localhost"`
+	RedisPort               string        `env:"REDIS_PORT" envDefault:"6379"`
+	RedisPassword           string        `env:"REDIS_PASSWORD"`
+	RedisPoolSize           int           `env:"REDIS_POOL_SIZE" envDefault:"20"`
+	RedisMinIdleConns       int           `env:"REDIS_MIN_IDLE_CONNS" envDefault:"5"`
+	FrontendURL             string        `env:"FRONTEND_URL" envDefault:"http://localhost:3000"`
+	AdminURL                string        `env:"ADMIN_URL" envDefault:"http://localhost:3067"`
+	RateLimitRPS            int           `env:"RATE_LIMIT_RPS" envDefault:"20"`
+	ShutdownTimeout         time.Duration `env:"SHUTDOWN_TIMEOUT" envDefault:"10s"`
+	CORSOrigins             []string      // Computed field
 }
 
 var Config cfg
