@@ -1,6 +1,4 @@
-run:
-  timeout: 5m
-  tests: true
+version: "2"
 
 linters:
   enable:
@@ -13,20 +11,24 @@ linters:
     - gosec
     - revive
 
-linters-settings:
-  govet:
-    enable-all: true
-    disable:
-      - fieldalignment # Too strict/opinionated for most backend projects
-  gosec:
-    excludes:
-      - G104 # errcheck handles unchecked errors better
-  revive:
-    rules:
-      - name: exported
-        disabled: true # Do not strictly force comments on every single exported symbol
+  settings:
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment
+    gosec:
+      excludes:
+        - G104
+    revive:
+      rules:
+        - name: exported
+          disabled: true
 
 issues:
   exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
+
+run:
+  timeout: 5m
+  tests: true
