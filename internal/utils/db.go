@@ -26,8 +26,8 @@ func InitDB() {
 		logging.Fatalf("Unable to parse database DSN: %v", err)
 	}
 
-	config.MaxConns = int32(Config.PostgresMaxConns)
-	config.MinConns = int32(Config.PostgresMinConns)
+	config.MaxConns = Config.PostgresMaxConns
+	config.MinConns = Config.PostgresMinConns
 	config.MaxConnLifetime = Config.PostgresMaxConnLifetime
 	config.MaxConnIdleTime = Config.PostgresMaxConnIdleTime
 

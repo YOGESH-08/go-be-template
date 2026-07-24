@@ -18,8 +18,8 @@ type cfg struct {
 	PostgresPassword        string        `env:"POSTGRES_PASSWORD,notEmpty"`
 	PostgresDB              string        `env:"POSTGRES_DB,notEmpty"`
 	PostgresSSLMode         string        `env:"POSTGRES_SSLMODE" envDefault:"disable"`
-	PostgresMaxConns        int           `env:"POSTGRES_MAX_CONNS" envDefault:"25"`
-	PostgresMinConns        int           `env:"POSTGRES_MIN_CONNS" envDefault:"5"`
+	PostgresMaxConns        int32         `env:"POSTGRES_MAX_CONNS" envDefault:"25"`
+	PostgresMinConns        int32         `env:"POSTGRES_MIN_CONNS" envDefault:"5"`
 	PostgresMaxConnLifetime time.Duration `env:"POSTGRES_MAX_CONN_LIFETIME" envDefault:"30m"`
 	PostgresMaxConnIdleTime time.Duration `env:"POSTGRES_MAX_CONN_IDLE_TIME" envDefault:"15m"`
 	RedisHost               string        `env:"REDIS_HOST" envDefault:"localhost"`

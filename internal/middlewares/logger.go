@@ -19,7 +19,7 @@ func Logger(next echo.HandlerFunc) echo.HandlerFunc {
 		req := c.Request()
 		res := c.Response()
 
-		logging.RouteLogger(c, logging.MiddlewareLogValues{
+		_ = logging.RouteLogger(c, logging.MiddlewareLogValues{
 			Method:  req.Method,
 			URI:     req.RequestURI,
 			Status:  res.Status,

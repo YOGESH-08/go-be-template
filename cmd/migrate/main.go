@@ -38,7 +38,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to open database connection: %v", err)
 	}
-	defer db.Close()
+	defer func() {
+		_ = db.Close()
+	}()
 
 	if err := db.Ping(); err != nil {
 		log.Fatalf("Failed to ping database: %v", err)
@@ -49,24 +51,25 @@ func main() {
 		log.Fatalf("Failed to set goose dialect: %v", err)
 	}
 
-	log.Printf("Executing migration command: %s", command)
-
 	// Execute migrations
 	switch command {
 	case "up":
+		log.Println("Executing migration command: up")
 		if err := goose.Up(db, migrationsDir); err != nil {
 			log.Fatalf("Goose migration UP failed: %v", err)
 		}
 	case "down":
+		log.Println("Executing migration command: down")
 		if err := goose.Down(db, migrationsDir); err != nil {
 			log.Fatalf("Goose migration DOWN failed: %v", err)
 		}
 	case "status":
+		log.Println("Executing migration command: status")
 		if err := goose.Status(db, migrationsDir); err != nil {
 			log.Fatalf("Goose migration STATUS failed: %v", err)
 		}
 	default:
-		log.Fatalf("Unknown migration command: %s. Use 'up', 'down', or 'status'.", command)
+		log.Fatal("Unknown migration command. Use 'up', 'down', or 'status'.")
 	}
 
 	log.Println("Migration command executed successfully")
