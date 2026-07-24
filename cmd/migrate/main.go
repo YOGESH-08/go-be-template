@@ -24,12 +24,13 @@ func main() {
 	utils.LoadConfig()
 
 	// Parse database DSN from config
-	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 		utils.Config.PostgresUser,
 		utils.Config.PostgresPassword,
 		utils.Config.PostgresHost,
 		utils.Config.PostgresPort,
 		utils.Config.PostgresDB,
+		utils.Config.PostgresSSLMode,
 	)
 
 	// Open connection using pgx stdlib compatibility layer

@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Go Backend Template API
   version: 1.0.0
-  description: API documentation for the VIT Club Board Go Backend Template.
+  description: API documentation for the CodeChefVIT Go Backend Template.
 servers:
   - url: http://localhost:8080
     description: Local development server

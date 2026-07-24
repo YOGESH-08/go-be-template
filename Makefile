@@ -1,7 +1,12 @@
-include .env
+-include .env
 export
 
 all: build
+
+setup:
+	@echo "Configuring git hooks..."
+	@git config core.hooksPath .githooks
+	@echo "Done. Pre-commit checks will now run before every commit."
 
 build:
 	@echo "Building binary..."

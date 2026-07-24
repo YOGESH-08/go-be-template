@@ -12,12 +12,13 @@ import (
 var DBPool *pgxpool.Pool
 
 func InitDB() {
-	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 		Config.PostgresUser,
 		Config.PostgresPassword,
 		Config.PostgresHost,
 		Config.PostgresPort,
 		Config.PostgresDB,
+		Config.PostgresSSLMode,
 	)
 
 	config, err := pgxpool.ParseConfig(dsn)

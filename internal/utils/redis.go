@@ -16,9 +16,14 @@ func InitRedis() {
 	addr := fmt.Sprintf("%s:%s", Config.RedisHost, Config.RedisPort)
 
 	RedisClient = redis.NewClient(&redis.Options{
-		Addr:     addr,
-		Password: Config.RedisPassword,
-		DB:       0, // Use default DB
+		Addr:         addr,
+		Password:     Config.RedisPassword,
+		DB:           0,
+		PoolSize:     20,
+		MinIdleConns: 5,
+		DialTimeout:  5 * time.Second,
+		ReadTimeout:  3 * time.Second,
+		WriteTimeout: 3 * time.Second,
 	})
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

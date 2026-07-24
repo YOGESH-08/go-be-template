@@ -28,6 +28,6 @@ func Logger(next echo.HandlerFunc) echo.HandlerFunc {
 			Error:   err,
 		})
 
-		return nil
+		return err
 	}
 }

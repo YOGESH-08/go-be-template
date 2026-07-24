@@ -42,6 +42,7 @@ func main() {
 	e.Use(middlewares.Logger)
 	e.Use(emiddleware.Secure())
 	e.Use(emiddleware.RateLimiter(emiddleware.NewRateLimiterMemoryStore(20)))
+	e.Use(emiddleware.BodyLimit("10M"))
 
 	// Configure CORS in non-production environments
 	if len(utils.Config.CORSOrigins) > 0 && utils.Config.Env != "production" {
@@ -61,7 +62,15 @@ func main() {
 	serverErrCh := make(chan error, 1)
 	go func() {
 		logging.Infof("Starting HTTP server on port %s", utils.Config.Port)
-		if err := e.Start(":" + utils.Config.Port); err != nil && err != http.ErrServerClosed {
+
+		srv := &http.Server{
+			Addr:         ":" + utils.Config.Port,
+			ReadTimeout:  15 * time.Second,
+			WriteTimeout: 15 * time.Second,
+			IdleTimeout:  60 * time.Second,
+		}
+
+		if err := e.StartServer(srv); err != nil && err != http.ErrServerClosed {
 			serverErrCh <- err
 		}
 	}()

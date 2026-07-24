@@ -16,6 +16,7 @@ type cfg struct {
 	PostgresUser     string   `env:"POSTGRES_USER,notEmpty"`
 	PostgresPassword string   `env:"POSTGRES_PASSWORD,notEmpty"`
 	PostgresDB       string   `env:"POSTGRES_DB,notEmpty"`
+	PostgresSSLMode  string   `env:"POSTGRES_SSLMODE" envDefault:"disable"`
 	RedisHost        string   `env:"REDIS_HOST" envDefault:"localhost"`
 	RedisPort        string   `env:"REDIS_PORT" envDefault:"6379"`
 	RedisPassword    string   `env:"REDIS_PASSWORD"`

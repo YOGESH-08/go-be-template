@@ -4,11 +4,9 @@ services:
     container_name: cc_postgres
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-go_template_db}
-    ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -21,8 +19,7 @@ services:
     image: redis:7-alpine
     container_name: cc_redis
     restart: always
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server ${REDIS_PASSWORD:+--requirepass $REDIS_PASSWORD}
     volumes:
       - redis_data:/data
     healthcheck:
@@ -42,22 +39,29 @@ services:
     environment:
       - ENV=production
       - PORT=${PORT:-8080}
-      - JWT_SECRET=${JWT_SECRET:-production_ready_very_long_jwt_secret_key_here}
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is required}
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - POSTGRES_DB=${POSTGRES_DB:-go_template_db}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_SSLMODE=require
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
-      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
-      - ADMIN_URL=${ADMIN_URL:-http://localhost:3067}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL:?FRONTEND_URL is required}
+      - ADMIN_URL=${ADMIN_URL:?ADMIN_URL is required}
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
 volumes:
   postgres_data:
